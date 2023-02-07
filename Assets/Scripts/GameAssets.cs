@@ -9,7 +9,6 @@ namespace Leo
         #region 資料
         public static GameAssets i;
 
-        public Sprite snakeHeadSprite;
 
         #endregion
 
@@ -18,6 +17,9 @@ namespace Leo
         {
             i = this;
         }
+
+        public Sprite snakeHeadSprite;
+
         #endregion
 
         #region 方法

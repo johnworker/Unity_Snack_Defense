@@ -28,8 +28,6 @@ namespace Leo
             HandleInput();
 
             HandleGridMovement();
-
-            transform.position = new Vector3(gridPosition.x, gridPosition.y);
         }
         #endregion
 
@@ -74,14 +72,23 @@ namespace Leo
 
         private void HandleGridMovement()
         {
-                        gridMoveTimer += Time.deltaTime;
+            gridMoveTimer += Time.deltaTime;
             if(gridMoveTimer >= gridMoveTimerMax)
             {
                 gridPosition += gridMoveDirection;
                 gridMoveTimer -= gridMoveTimerMax;
-            }
 
-        } 
+                transform.position = new Vector3(gridPosition.x, gridPosition.y);
+                transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirection) - 90);
+            }
+        }
+
+        private float GetAngleFromVector(Vector2Int dir)
+        {
+            float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            if (n < 0) n += 360;
+            return n;
+        }
         #endregion
     }
 
