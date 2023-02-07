@@ -4,17 +4,24 @@ using UnityEngine;
 using CodeMonkey;
 using CodeMonkey.Utils;
 
-public class GameHandler : MonoBehaviour
+namespace Leo
 {
-    // Start is called before the first frame update
-    void Start()
+    public class GameHandler : MonoBehaviour
     {
-        
+        // Start is called before the first frame update
+        void Start()
+        {
+
+            GameObject snakeHeadGameObject = new GameObject();
+            SpriteRenderer snakeSpriteRenderer = snakeHeadGameObject.AddComponent<SpriteRenderer>();
+            snakeSpriteRenderer.sprite = GameAssets.i.snakeHeadSprite;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
