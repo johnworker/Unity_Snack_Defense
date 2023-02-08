@@ -8,19 +8,16 @@ namespace Leo
 {
     public class GameHandler : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        private LevelGrid levelGrid;
+
+        private void Start()
         {
 
-             GameObject snakeHeadGameObject = new GameObject();
+            levelGrid = new LevelGrid(20, 20);
+
+            GameObject snakeHeadGameObject = new GameObject();
             SpriteRenderer snakeSpriteRenderer = snakeHeadGameObject.AddComponent<SpriteRenderer>();
             snakeSpriteRenderer.sprite = GameAssets.i.snakeHeadSprite;
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey;
+using CodeMonkey.Utils;
 
 namespace Leo
 {
@@ -17,6 +18,8 @@ namespace Leo
             this.height = height;
 
             SpawnFood();
+
+            FunctionPeriodic.Create(SpawnFood, 1f);
         }
 
         private void SpawnFood()
@@ -26,6 +29,14 @@ namespace Leo
             GameObject foodGameObject = new GameObject("Food", typeof(SpriteRenderer));
             foodGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.foodSprite;
             foodGameObject.transform.position = new Vector3(fooGridPosition.x, fooGridPosition.y);
+        }
+
+        public void SnakeMoved(Vector2Int snakeGridPosition) 
+        { 
+            if(snakeGridPosition == fooGridPosition)
+            {
+
+            }
         }
     }
 
