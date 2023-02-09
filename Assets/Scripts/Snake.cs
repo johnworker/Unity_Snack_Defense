@@ -12,6 +12,8 @@ namespace Leo
         private float gridMoveTimer;
         private float gridMoveTimerMax;
         private LevelGrid LevelGrid;
+        private int snakeBodySize;
+        private List<Vector2Int> snakeMovePositionList;
 
         #endregion
 
@@ -83,6 +85,15 @@ namespace Leo
             {
                 gridPosition += gridMoveDirection;
                 gridMoveTimer -= gridMoveTimerMax;
+
+                snakeMovePositionList.Insert(0, gridPosition);
+
+                gridPosition += gridMoveDirection;
+
+                if(snakeMovePositionList.Count >= snakeBodySize + 1)
+                {
+                    snakeMovePositionList.RemoveAt(snakeMovePositionList.Count - 1);
+                }
 
                 transform.position = new Vector3(gridPosition.x, gridPosition.y);
                 transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirection) - 90);

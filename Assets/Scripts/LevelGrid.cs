@@ -8,12 +8,16 @@ namespace Leo
 {
     public class LevelGrid
     {
+        #region 資料
         private Vector2Int fooGridPosition;
         private GameObject foodGameObject;
         private int width;
         private int height;
         private Snake snake;
 
+        #endregion
+
+        #region 事件
         public LevelGrid(int width, int height) 
         {
             this.width = width;
@@ -28,6 +32,9 @@ namespace Leo
             this.snake = snake;
         }
 
+        #endregion
+
+        #region 方法
         private void SpawnFood()
         {
             fooGridPosition = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
@@ -46,6 +53,8 @@ namespace Leo
                 CMDebug.TextPopupMouse("Snake Ate Food");
             }
         }
+
+        #endregion
     }
 
 }

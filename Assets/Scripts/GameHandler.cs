@@ -8,10 +8,13 @@ namespace Leo
 {
     public class GameHandler : MonoBehaviour
     {
+        #region 資料
         [SerializeField] private Snake snake;
 
         private LevelGrid levelGrid;
+        #endregion
 
+        #region 事件
         private void Start()
         {
 
@@ -21,6 +24,10 @@ namespace Leo
             levelGrid.Setup(snake);
 
         }
+        #endregion
+
+        #region 方法
+        #endregion
     }
 
 }
