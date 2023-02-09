@@ -9,8 +9,10 @@ namespace Leo
     public class LevelGrid
     {
         private Vector2Int fooGridPosition;
+        private GameObject foodGameObject;
         private int width;
         private int height;
+        private Snake snake;
 
         public LevelGrid(int width, int height) 
         {
@@ -19,14 +21,18 @@ namespace Leo
 
             SpawnFood();
 
-            FunctionPeriodic.Create(SpawnFood, 1f);
+        }
+
+        public void Setup(Snake snake) 
+        {
+            this.snake = snake;
         }
 
         private void SpawnFood()
         {
             fooGridPosition = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
 
-            GameObject foodGameObject = new GameObject("Food", typeof(SpriteRenderer));
+            foodGameObject = new GameObject("Food", typeof(SpriteRenderer));
             foodGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.foodSprite;
             foodGameObject.transform.position = new Vector3(fooGridPosition.x, fooGridPosition.y);
         }
@@ -35,7 +41,9 @@ namespace Leo
         { 
             if(snakeGridPosition == fooGridPosition)
             {
-
+                Object.Destroy(foodGameObject);
+                SpawnFood();
+                CMDebug.TextPopupMouse("Snake Ate Food");
             }
         }
     }

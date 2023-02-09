@@ -11,10 +11,16 @@ namespace Leo
         private Vector2Int gridPosition;
         private float gridMoveTimer;
         private float gridMoveTimerMax;
+        private LevelGrid LevelGrid;
 
         #endregion
 
         #region ¨Æ¥ó
+        public void Setup(LevelGrid levelGrid)
+        {
+            this.LevelGrid = levelGrid;
+        }
+
         private void Awake()
         {
             gridPosition = new Vector2Int(10, 10);
@@ -80,6 +86,8 @@ namespace Leo
 
                 transform.position = new Vector3(gridPosition.x, gridPosition.y);
                 transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirection) - 90);
+
+                LevelGrid.SnakeMoved(gridPosition);
             }
         }
 
