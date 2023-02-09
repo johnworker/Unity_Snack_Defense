@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CodeMonkey.Utils;
 
 namespace Leo
 {
@@ -93,6 +94,13 @@ namespace Leo
                 if(snakeMovePositionList.Count >= snakeBodySize + 1)
                 {
                     snakeMovePositionList.RemoveAt(snakeMovePositionList.Count - 1);
+                }
+
+                for (int i = 0; i < snakeMovePositionList.Count; i++)
+                {
+                    Vector2Int snakeMovePosition = snakeMovePositionList[i];
+                    World_Sprite world_Sprite = World_Sprite.Create(new Vector3(snakeMovePosition.x,snakeMovePosition.y),Vector3.one * .5f, Color.white);
+                    FunctionTimer.Create(world_Sprite.DestroySelf, gridMoveTimerMax);
                 }
 
                 transform.position = new Vector3(gridPosition.x, gridPosition.y);
