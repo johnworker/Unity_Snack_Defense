@@ -37,20 +37,28 @@ namespace Leo
         #region ¤èªk
         private void SpawnFood()
         {
-            fooGridPosition = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
+            do
+            {
+                fooGridPosition = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
+            }
+            while (snake.GetFullSnakeGridPositionList().IndexOf(fooGridPosition) != -1);
 
             foodGameObject = new GameObject("Food", typeof(SpriteRenderer));
             foodGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.foodSprite;
             foodGameObject.transform.position = new Vector3(fooGridPosition.x, fooGridPosition.y);
         }
 
-        public void SnakeMoved(Vector2Int snakeGridPosition) 
+        public bool TrySnakeEatFood(Vector2Int snakeGridPosition) 
         { 
             if(snakeGridPosition == fooGridPosition)
             {
                 Object.Destroy(foodGameObject);
                 SpawnFood();
-                CMDebug.TextPopupMouse("Snake Ate Food");
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

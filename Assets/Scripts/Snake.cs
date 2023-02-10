@@ -32,7 +32,7 @@ namespace Leo
             gridMoveDirection = new Vector2Int(1, 0);
 
             snakeMovePositionList = new List<Vector2Int>();
-            snakeBodySize = 1;
+            snakeBodySize = 0;
         }
 
         private void Update()
@@ -94,7 +94,16 @@ namespace Leo
 
                 gridPosition += gridMoveDirection;
 
-                if(snakeMovePositionList.Count >= snakeBodySize + 1)
+                bool snakeAteFood = levelGrid.TrySnakeEatFood(gridPosition);
+
+                if (snakeAteFood)
+                {
+                    // 蛇吃食物，身體變長
+                    snakeBodySize++;
+                }
+
+
+                if (snakeMovePositionList.Count >= snakeBodySize + 1)
                 {
                     snakeMovePositionList.RemoveAt(snakeMovePositionList.Count - 1);
                 }
@@ -109,7 +118,6 @@ namespace Leo
                 transform.position = new Vector3(gridPosition.x, gridPosition.y);
                 transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirection) - 90);
 
-                levelGrid.SnakeMoved(gridPosition);
             }
         }
 
@@ -118,6 +126,19 @@ namespace Leo
             float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             if (n < 0) n += 360;
             return n;
+        }
+
+        public Vector2Int GetGridPosition()
+        {
+            return gridPosition;
+        }
+
+        // 回傳所有位置列表位置包含蛇的：頭和身體
+        public List<Vector2Int> GetFullSnakeGridPositionList()
+        {
+            List<Vector2Int> gridPositionList = new List<Vector2Int>() { gridPosition };
+            gridPositionList.AddRange(snakeMovePositionList);
+            return gridPositionList;
         }
         #endregion
     }
